@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="200dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/vLine"
+        android:layout_width="4dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#418CE3"
+        app:layout_constraintEnd_toStartOf="@id/tv_order_no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_order_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/vLine"
+        app:layout_constraintEnd_toStartOf="@id/tv_err"
+        app:layout_constraintStart_toEndOf="@+id/vLine"
+        app:layout_constraintTop_toTopOf="@+id/vLine"
+        tools:text="订单号：YYZ211231801290SPYYZ211231801290SPYYZ211231801290SP" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_err"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_round_red_8"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="2dp"
+        android:textColor="#F4443E"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/vLine"
+        app:layout_constraintEnd_toStartOf="@+id/tv_status"
+        app:layout_constraintStart_toEndOf="@+id/tv_order_no"
+        app:layout_constraintTop_toTopOf="@+id/vLine"
+        tools:text="@string/order_over_pick" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:drawablePadding="5dp"
+        android:paddingVertical="10dp"
+        android:textColor="#606266"
+        android:textSize="14sp"
+        app:drawableEndCompat="@drawable/icon_gray_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/vLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vLine"
+        tools:text="@string/order_wait_prepare" />
+
+    <View
+        android:id="@+id/hLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#E8E8E8"
+        app:layout_constraintTop_toBottomOf="@id/vLine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#606266"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hLine"
+        tools:text="09月22日 08:00 - 09月27日 12:00 (5天)" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tag_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/order_tag_user"
+        android:textColor="#606266"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="@string/order_tag_user"
+        android:textColor="#606266"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_user"
+
+        app:layout_constraintStart_toEndOf="@id/tag_user"
+        app:layout_constraintTop_toTopOf="@+id/tag_user"
+        tools:text="张三 13333332211" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tag_plate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/order_tag_plate"
+        android:textColor="#606266"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tag_user" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_plate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="@string/order_tag_user"
+        android:textColor="#606266"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_plate"
+        app:layout_constraintStart_toEndOf="@id/tag_plate"
+        app:layout_constraintTop_toTopOf="@+id/tag_plate"
+        tools:text="粤ADM7197" />
+
+    <View
+        android:id="@+id/hLine_sec"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        android:background="#E8E8E8"
+        app:layout_constraintTop_toBottomOf="@+id/tag_plate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

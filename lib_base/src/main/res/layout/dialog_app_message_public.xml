@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bg_ffffff_round_10"
+        android:paddingTop="21dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="9dp"
+            android:gravity="center"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            tools:text="Content" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E7ED"
+            android:layout_below="@id/tv_content"
+            />
+
+        <LinearLayout
+            android:layout_below="@id/line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/text_cancel"
+                android:textColor="@color/text_color_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#E4E7ED"
+                />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/text_confirm"
+                android:textSize="15sp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="#418CE3"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

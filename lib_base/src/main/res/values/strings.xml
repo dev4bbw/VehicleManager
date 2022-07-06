@@ -1,0 +1,42 @@
+<resources>
+    <string name="basic_name">联友出行</string>
+    <string name="app_type">车管端</string>
+    <string name="protocol_private">《用户隐私协议》</string>
+    <string name="protocol_use">《用户使用协议》</string>
+    <string name="no_data">暂无数据</string>
+
+    <!--login-->
+    <string name="login">登录</string>
+
+    <string name="login_hint">科技，构建美好出行新生活</string>
+    <string name="input_hint">请输入账号…</string>
+    <string name="pwd_hint">请输入密码…</string>
+    <string name="code_hint">验证码注册登录</string>
+    <string name="input_mobile">请输入手机号…</string>
+    <string name="input_code">请输入验证码…</string>
+    <string name="get_code">获取验证码</string>
+    <string name="text_agree">同意</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_confirm">确认</string>
+    <!--pick-->
+    <string name="business_zxc">尊享车</string>
+    <string name="business_lyzc">联友租车</string>
+    <string name="business_text">请选择业务类型</string>
+    <!--main-->
+    <string name="main_setting">设置</string>
+    <string name="main_order_manage">订单管理</string>
+    <string name="main_car_manage">车辆管理</string>
+    <string name="main_inventory_manage">资产管理</string>
+    <string name="main_vio_manage">违章管理</string>
+    <string name="main_auth_manage">认证处理</string>
+    <string name="main_apply_manage">用车申请</string>
+    <string name="main_repair_manage">车辆维修</string>
+    <string name="main_overview_manage">运营总览</string>
+
+    <!--order-->
+    <string name="order_wait_prepare">待整备</string>
+    <string name="order_over_pick">超时未取车</string>
+    <string name="order_tag_user">用户：</string>
+    <string name="order_tag_plate">车牌号：</string>
+
+</resources>
