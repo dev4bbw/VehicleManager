@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VehicleManager">
         <activity
-            android:name=".MainLYZCActivity"
+            android:name=".main.MainLYZCActivity"
             android:exported="true"/>
     </application>
 

@@ -1,4 +1,4 @@
-package com.lanyou.zxc.main
+package com.lanyou.module_lyzc.main
 
 import android.os.Process
 import androidx.fragment.app.Fragment
@@ -13,23 +13,23 @@ import com.lanyou.lib_base.utils.ActivityController
 import com.lanyou.lib_base.utils.ToastUtil
 import com.lanyou.lib_base.utils.mmkvUtil
 import com.lanyou.lib_base.utils.routerNavigate
-import com.lanyou.zxc.databinding.ActivityZxcMainBinding
+import com.lanyou.module_lyzc.databinding.ActivityLyzcMainBinding
 
-@Route(path = ARouterConstant.ZXC_MAIN)
-class MainZXCActivity : BaseActivity<ActivityZxcMainBinding, ListViewModel>() {
+@Route(path = ARouterConstant.LYZC_MAIN)
+class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>() {
     private var exitTime: Long = 0
 
-    override fun getViewBinding(): ActivityZxcMainBinding =
-        ActivityZxcMainBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityLyzcMainBinding =
+        ActivityLyzcMainBinding.inflate(layoutInflater)
 
     override fun initView() {
         binding.bottom.vpContent.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = 3
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    0 -> ListFragment("1")
-                    1 -> ListFragment("2")
-                    else -> ListFragment("3")
+                    0 -> ZCListFragment("1")
+                    1 -> ZCListFragment("2")
+                    else -> ZCListFragment("3")
                 }
             }
         }
@@ -79,11 +79,10 @@ class MainZXCActivity : BaseActivity<ActivityZxcMainBinding, ListViewModel>() {
         binding.bottom.apply {
             rlOrder.setOnClickListener {}
             rlCarManage.setOnClickListener {}
-            rlInventory.setOnClickListener {}
             rlViolation.setOnClickListener {}
-            rlAuth.setOnClickListener {}
             rlRepair.setOnClickListener {}
-            rlOverview.setOnClickListener {}
+            rlReimburse.setOnClickListener {  }
+            rlAuth.setOnClickListener {}
         }
 
         binding.left.apply {

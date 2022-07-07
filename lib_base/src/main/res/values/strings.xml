@@ -32,6 +32,7 @@
     <string name="main_apply_manage">用车申请</string>
     <string name="main_repair_manage">车辆维修</string>
     <string name="main_overview_manage">运营总览</string>
+    <string name="main_reimburse">报销管理</string>
 
     <!--order-->
     <string name="order_wait_prepare">待整备</string>
