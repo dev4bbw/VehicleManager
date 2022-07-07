@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="HeadLayout">
+        <attr name="head_bg_color" format="color" />
+        <attr name="head_back_img" format="reference" />
+        <attr name="head_title" format="string" />
+        <attr name="head_title_size" format="float" />
+        <attr name="head_title_color" format="color" />
+        <attr name="head_menu_img" format="reference" />
+        <attr name="head_right_text_color" format="color" />
+        <attr name="head_left_show" format="boolean"/>
+        <attr name="head_title_show" format="boolean"/>
+    </declare-styleable>
+</resources>

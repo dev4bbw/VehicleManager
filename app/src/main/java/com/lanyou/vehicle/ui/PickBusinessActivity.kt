@@ -39,9 +39,11 @@ class PickBusinessActivity : BaseActivity<ActivityPickBusinessBinding, BaseViewM
 
     override fun initListener() {
         binding.llZxc.setOnClickListener {
+            mmkvUtil.put(KeyConstant.BUSINESS_TYPE,1)
             routerNavigate(ARouterConstant.ZXC_MAIN)
         }
         binding.llLyzc.setOnClickListener {
+            mmkvUtil.put(KeyConstant.BUSINESS_TYPE,2)
             routerNavigate(ARouterConstant.LYZC_MAIN)
         }
     }

@@ -21,9 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity"
-            android:exported="true"/>
-        <activity android:name=".ui.PickBusinessActivity"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.PickBusinessActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.SettingActivity"
+            android:exported="true" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout-v26/activity_setting.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout/activity_main.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout/activity_pick_business.xml" value="0.24010416666666667" />
+        <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout/activity_setting.xml" value="0.264" />
         <entry key="..\:/Android2022/LanyouVehicleKT/app/src/main/res/layout/activity_splash.xml" value="0.24010416666666667" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/drawable/base_shape_toast_bg_radius12.xml" value="0.1" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/drawable/bg_ffffff_round_10.xml" value="0.144" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/customer_toast.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/customtab_new_tack_item.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/dialog_app_message_public.xml" value="0.24114583333333334" />
+        <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/layout_head.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/layout_progress_dialog.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/layout_pwd_visible.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_lyzc_main.xml" value="0.24114583333333334" />

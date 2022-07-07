@@ -50,6 +50,11 @@ object mmkvUtil {
         return true
     }
 
+    fun getBoolean(key: String,defVal: Boolean):Boolean{
+        val mmkv = MMKV.defaultMMKV()
+        return mmkv.decodeBool(key,defVal)
+    }
+
     fun getString(key: String): String {
         val mmkv = MMKV.defaultMMKV();
         return mmkv.decodeString(key,"")?:""

@@ -3,6 +3,7 @@ package com.lanyou.vehicle.viewmodel
 import androidx.lifecycle.*
 import com.lanyou.lib_base.BuildConfig
 import com.lanyou.lib_base.KeyConstant
+import com.lanyou.lib_base.StatusConstant
 import com.lanyou.lib_base.base.BaseViewModel
 import com.lanyou.lib_base.base.request
 import com.lanyou.lib_base.net.ApiConfig
@@ -24,6 +25,7 @@ class LoginViewModel : BaseViewModel() {
                 if (it != null) {
                     mmkvUtil.put(KeyConstant.REQ_TOKEN, it.`Access-Token`)
                     mmkvUtil.put(KeyConstant.DEVICE_ID, it.deviceId)
+                    mmkvUtil.put(StatusConstant.IS_LOGIN,true)
                     if (it.h5Url?.isNotBlank() == true) {
                         ApiConfig.baseH5Url = it.h5Url!!
                     }
