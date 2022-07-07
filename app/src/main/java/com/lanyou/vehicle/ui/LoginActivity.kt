@@ -1,6 +1,8 @@
 package com.lanyou.vehicle.ui
 
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.lanyou.lib_base.ARouterConstant
 import com.lanyou.lib_base.BuildConfig
 import com.lanyou.lib_base.KeyConstant
 import com.lanyou.lib_base.base.BaseActivity
@@ -9,6 +11,7 @@ import com.lanyou.lib_base.utils.mmkvUtil
 import com.lanyou.vehicle.databinding.ActivityLoginBinding
 import com.lanyou.vehicle.viewmodel.LoginViewModel
 
+@Route(path = ARouterConstant.LOGIN)
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun getViewBinding() = ActivityLoginBinding.inflate(layoutInflater)
 

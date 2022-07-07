@@ -10,6 +10,12 @@ object KeyConstant {
     const val LOGIN_ACCOUNT = "login_account"
     const val LOGIN_PSW = "login_psw"
 
+    const val BUSINESS_TYPE = "business_type"   //1-尊享车 2-联友租车
+
+}
+
+object StatusConstant{
+    const val IS_LOGIN = "isLogin"
 }
 
 object ConfigConstant{
@@ -17,6 +23,12 @@ object ConfigConstant{
 }
 
 object ARouterConstant{
+    //公共部分
+    //设置
+    const val LOGIN ="/common/LoginActivity"
+
+    const val SETTING ="/common/SettingActivity"
+
     //尊享车
     const val ZXC_MAIN = "/module_zxc/MainZXCActivity"
 

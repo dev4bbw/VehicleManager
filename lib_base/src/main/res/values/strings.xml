@@ -39,4 +39,11 @@
     <string name="order_tag_user">用户：</string>
     <string name="order_tag_plate">车牌号：</string>
 
+    <!--setting-->
+    <string name="setting_update">应用更新</string>
+    <string name="setting_about">关于我们</string>
+    <string name="setting_cancellation">注销账户</string>
+    <string name="setting_exit">退出登录</string>
+
+
 </resources>

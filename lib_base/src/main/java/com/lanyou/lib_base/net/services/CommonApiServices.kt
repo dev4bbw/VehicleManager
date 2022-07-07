@@ -25,6 +25,12 @@ interface CommonApiServices {
     @POST("lycxadmin/app/sysUser/login")
     suspend fun login(@Body body: RequestBody): BaseResponse<LoginBean>
 
+    /**
+     * 登录
+     */
+    @Headers("urlname:appinfologin")
+    @POST("lycxadmin/app/sysUser/login")
+    suspend fun logout(@Body body: RequestBody): BaseResponse<LoginBean>
 
     /**
      * 获取用户信息
