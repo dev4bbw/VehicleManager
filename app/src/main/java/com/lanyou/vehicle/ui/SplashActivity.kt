@@ -32,23 +32,23 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
             if (it == null){
                 toLogin()
             }else{
-                CommonDialog.showConfirmDialog(
-                    context = this@SplashActivity,
-                    titleTx = it.title ?: "",
-                    contentTx = it.content ?: "",
-                    onlyConfirm = it.forceUpdate?:false,
-                    onCancelListener = object :CommonDialog.OnCancelListener{
-                        override fun onClick(dialog: AlertDialog) {
-                            dialog.dismiss()
-                        }
-                    },
-                    onConfirmListener = object : CommonDialog.OnConfirmListener {
-                        override fun onClick(dialog:AlertDialog) {
-                            dialog.dismiss()
-                            toDownLoad()
-                        }
-                    }
-                )
+                routerNavigate(ARouterConstant.UPDATE)
+//                CommonDialog.showConfirmDialog(
+//                    context = this@SplashActivity,
+//                    titleTx = it.title ?: "",
+//                    contentTx = it.content ?: "",
+//                    onlyConfirm = it.forceUpdate?:false,
+//                    onCancelListener = object :CommonDialog.OnCancelListener{
+//                        override fun onClick(dialog: AlertDialog) {
+//                            toLogin()
+//                        }
+//                    },
+//                    onConfirmListener = object : CommonDialog.OnConfirmListener {
+//                        override fun onClick(dialog:AlertDialog) {
+//                            toDownLoad()
+//                        }
+//                    }
+//                )
             }
         }
     }

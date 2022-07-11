@@ -9,7 +9,7 @@ import com.lanyou.lib_base.StatusConstant
 fun routerNavigate(path: String, bundle: Bundle = Bundle()) {
     ARouter.getInstance()
         .build(path)
-//        .with(bundle)
+        .with(bundle)
         .navigation()
 }
 

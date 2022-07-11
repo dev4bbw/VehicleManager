@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lanyou.lib_base">
-
+    <application>
+        <activity android:name=".utils.update.UpdateDialogActivity"
+            android:exported="true"
+            android:theme="@style/DialogActivityTheme"
+            />
+    </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

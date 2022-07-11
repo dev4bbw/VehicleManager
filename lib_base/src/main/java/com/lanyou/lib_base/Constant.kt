@@ -24,6 +24,8 @@ object ConfigConstant{
 
 object ARouterConstant{
     //公共部分
+    //更新
+    const val UPDATE = "/base/UpdateDialogActivity"
     //设置
     const val LOGIN ="/common/LoginActivity"
 

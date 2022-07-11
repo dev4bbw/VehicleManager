@@ -39,9 +39,11 @@ object CommonDialog {
         if (titleTx.isBlank()) title.visibility = View.GONE else title.text = titleTx
         if (contentTx.isBlank()) content.visibility = View.GONE else content.text = contentTx
         cancel.setOnClickListener {
+            dialog.dismiss()
             onCancelListener.onClick(dialog)
         }
         confirm.setOnClickListener {
+            dialog.dismiss()
             onConfirmListener.onClick(dialog)
         }
         if (onlyConfirm) {

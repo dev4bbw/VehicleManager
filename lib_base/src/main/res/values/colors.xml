@@ -13,6 +13,6 @@
     <color name="text_color_grey_2">#909399</color>
     <color name="text_hint_color">#D2D2D4</color>
     <color name="app_theme_color">#418CE3</color>
-
+    <color name="line_green">#7ec059</color>
 
 </resources>
