@@ -70,7 +70,6 @@ class UpdateReceiver : BroadcastReceiver() {
         }
         val notification = builder.build()
         systemService.notify(1, notification)
-
     }
 
     private fun createNotificationChannel(systemService: NotificationManager) {
@@ -115,6 +114,7 @@ class UpdateReceiver : BroadcastReceiver() {
 
         fun send(context: Context, progress: Int){
             val intent = Intent(context.packageName+ DOWNLOAD_ONLY)
+            intent.putExtra(PROGRESS, progress)
             context.sendBroadcast(intent)
         }
 

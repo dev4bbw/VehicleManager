@@ -99,6 +99,17 @@ object mmkvUtil {
         return mmkv.decodeInt(key)
     }
 
+    fun getLong(key: String): Long {
+        val mmkv = MMKV.defaultMMKV();
+        return mmkv.decodeLong(key)
+    }
+
+    fun getLong(key: String, defult: Long): Long {
+        val mmkv = MMKV.defaultMMKV();
+        if (mmkv.decodeInt(key) == 0) return defult
+        return mmkv.decodeLong(key)
+    }
+
     fun getByteArray(key: String): ByteArray? {
         val mmkv = MMKV.defaultMMKV()
         return mmkv.decodeBytes(key)

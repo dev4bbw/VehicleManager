@@ -12,6 +12,8 @@ object KeyConstant {
 
     const val BUSINESS_TYPE = "business_type"   //1-尊享车 2-联友租车
 
+    const val DOWNLOAD_ID = "download_id"
+
 }
 
 object StatusConstant{

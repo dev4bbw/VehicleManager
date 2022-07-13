@@ -61,6 +61,12 @@ dependencies {
     api 'com.alibaba:arouter-api:1.5.2'
     kapt "com.alibaba:arouter-compiler:1.5.2"
 
+    //permission
+//    api "com.github.permissions-dispatcher:permissionsdispatcher:4.9.2"
+//    kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
+//    api 'com.vmadalin:easypermissions-ktx:1.0.0'
+    api 'com.guolindev.permissionx:permissionx:1.6.4'
+
     //协程
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
@@ -103,4 +109,7 @@ dependencies {
     api 'io.github.scwang90:refresh-header-two-level:2.0.5'   //二级刷新头
     api 'io.github.scwang90:refresh-footer-ball:2.0.5'        //球脉冲加载
     api 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+
+    //download
+    api 'com.liulishuo.filedownloader:library:1.7.7'
 }

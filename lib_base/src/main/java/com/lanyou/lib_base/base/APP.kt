@@ -6,6 +6,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.elvishew.xlog.LogLevel
 import com.elvishew.xlog.XLog
 import com.lanyou.lib_base.utils.Foreground
+import com.liulishuo.filedownloader.FileDownloader
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -20,10 +22,24 @@ class APP : Application() {
         XLog.init(LogLevel.ALL)
         //数据存储
         MMKV.initialize(this)
+        initDown()
+
         //ARouter
         initARouter()
 
         Foreground.init(this)
+    }
+
+    private fun initDown() {
+        FileDownloader.setupOnApplicationOnCreate(this)
+            .connectionCreator(
+                FileDownloadUrlConnection.Creator(
+                    FileDownloadUrlConnection.Configuration()
+                        .connectTimeout(15000) // set connection timeout.
+                        .readTimeout(15000) // set read timeout.
+                )
+            )
+            .commit()
     }
 
     private fun initARouter() {

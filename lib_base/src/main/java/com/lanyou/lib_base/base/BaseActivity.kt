@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType
 import kotlin.math.abs
 
 abstract class BaseActivity<T : ViewBinding, VM : BaseViewModel> :
-    AppCompatActivity() {
+    PermissionActivity() {
     lateinit var binding: T
     protected lateinit var viewModel: VM
 
