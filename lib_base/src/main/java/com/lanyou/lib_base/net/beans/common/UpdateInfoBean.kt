@@ -1,9 +1,13 @@
 package com.lanyou.lib_base.net.beans.common
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 /**
  * Created by EZ on 2017/8/5.
  */
+@Parcelize
 data class UpdateInfoBean(
      val createTime: String?,
      val updateTime: String?,
@@ -16,8 +20,8 @@ data class UpdateInfoBean(
      val forceUpdate: Boolean?,
      val enable: Int?,
      val platform: String?,
-     val appletsId: Any?,
+     val appletsId: String?,
      val downloadUrl: String?,
      val creater: String?,
      val updater: String?
-)
+):Parcelable

@@ -1,90 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_bg">
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="20dp"
-        android:text="@string/update_disc"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:id="@+id/version"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="1.0.0" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:paddingStart="20dp"
-        android:paddingVertical="20dp"
-        android:textColor="@color/app_text_color"
-        android:lineSpacingExtra="2dp"
-        android:textSize="14sp"
-        android:id="@+id/content"
-        tools:text="新版本特性：\n1.xxxx\n2.ssss\n3.子1232312"
-        app:layout_constraintTop_toBottomOf="@+id/version"
-        app:layout_constraintBottom_toTopOf="@+id/h_line"
+    <LinearLayout
+        android:id="@+id/ll_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/update_disc"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            tools:text="1.0.0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.lanyou.lib_base.widgets.ProgressView
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:lineSpacingExtra="2dp"
+        android:paddingVertical="20dp"
+        android:paddingStart="20dp"
+        android:textColor="@color/app_text_color"
+        android:textSize="14sp"
+        tools:text="新版本特性：\n1.xxxx\n2.ssss\n3.子1232312" />
 
     <View
         android:id="@+id/h_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_green"
-        app:layout_constraintBottom_toTopOf="@id/cancel" />
+        android:background="@color/line_green" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:background="@drawable/bg_left_bottom_radius"
-        android:id="@+id/cancel"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:gravity="center"
-        android:text="@string/update_cancel"
-        android:textColor="@color/line_green"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/v_view"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal">
 
-    <View
-        android:id="@+id/v_view"
-        android:layout_width="1dp"
-        android:layout_height="55dp"
-        android:background="@color/line_green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/confirm"
-        app:layout_constraintStart_toEndOf="@id/cancel" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_left_bottom_radius"
+            android:gravity="center"
+            android:text="@string/update_cancel"
+            android:textColor="@color/line_green"
+            android:textSize="16sp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:background="@drawable/bg_right_bottom_radius"
-        android:id="@+id/confirm"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:text="@string/update_confirm"
-        android:textColor="@color/line_green"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/v_view" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/v_view"
+            android:layout_width="1dp"
+            android:layout_height="55dp"
+            android:background="@color/line_green" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_right_bottom_radius"
+            android:gravity="center"
+            android:text="@string/update_confirm"
+            android:textColor="@color/line_green"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

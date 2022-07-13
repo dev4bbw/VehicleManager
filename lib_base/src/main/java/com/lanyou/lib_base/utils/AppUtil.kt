@@ -9,6 +9,7 @@ import android.os.Process
 import android.provider.Settings
 import com.lanyou.lib_base.BuildConfig
 import com.lanyou.lib_base.base.APP
+import java.io.File
 
 /**
  *
@@ -105,4 +106,23 @@ object AppUtil {
         }
         return null
     }
+
+    /**
+     * 删除文件
+     *
+     * @param filePath
+     */
+    fun deleteFile(filePath: String?) {
+        if (filePath == null) {
+            return
+        }
+        val file = File(filePath)
+        try {
+            if (file.isFile) {
+                file.delete()
+            }
+        } catch (e: Exception) {
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.lanyou.lib_base.ARouterConstant
 import com.lanyou.lib_base.KeyConstant
 import com.lanyou.lib_base.StatusConstant
+import com.lanyou.lib_base.net.beans.common.UpdateInfoBean
 
 /**
  * 通用方法
@@ -15,11 +16,10 @@ fun routerNavigate(path: String) {
         .build(path)
         .navigation()
 }
-fun routerNavUpdate(context: Activity, path: String, isForce:Boolean, downUrl: String,requestCode:Int) {
+fun routerNavUpdate(context: Activity, path: String, bean: UpdateInfoBean, requestCode:Int) {
     ARouter.getInstance()
         .build(path)
-        .withBoolean("IS_FORCE",isForce)
-        .withString("DOWN_URL",downUrl)
+        .withParcelable("DOWN_BEAN",bean)
         .navigation(context,requestCode)
 }
 

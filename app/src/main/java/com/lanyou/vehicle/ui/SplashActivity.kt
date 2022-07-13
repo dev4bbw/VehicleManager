@@ -38,8 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 routerNavUpdate(
                     this@SplashActivity,
                     ARouterConstant.UPDATE,
-                    it.forceUpdate ?: false,
-                    it.downloadUrl?:"",
+                    it,
                     1000
                 )
 //                CommonDialog.showConfirmDialog(

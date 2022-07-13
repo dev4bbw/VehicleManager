@@ -14,6 +14,7 @@ import com.lanyou.lib_base.R
 import com.lanyou.lib_base.base.BaseActivity
 import com.lanyou.lib_base.base.BaseViewModel
 import com.lanyou.lib_base.databinding.ActivityUpdateDialogBinding
+import com.lanyou.lib_base.net.beans.common.UpdateInfoBean
 import com.lanyou.lib_base.utils.ActivityController
 import com.lanyou.lib_base.utils.ToastUtil
 
@@ -23,12 +24,8 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
     private var exitTime: Long = 0
 
     @JvmField
-    @Autowired(name = "IS_FORCE")
-    var isForce: Boolean = false
-
-    @JvmField
-    @Autowired(name = "DOWN_URL")
-    var downUrl: String = ""
+    @Autowired(name = "DOWN_BEAN")
+    var bean: UpdateInfoBean ?= null
 
 
     override fun getViewBinding(): ActivityUpdateDialogBinding =
@@ -36,18 +33,23 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
 
     override fun initView() {
         ARouter.getInstance().inject(this)
-
-        if (isForce) {
+        if (bean == null){
+            finish()
+        }
+        if (bean?.forceUpdate == true) {
             binding.apply {
                 cancel.visibility = View.GONE
                 vView.visibility = View.GONE
                 confirm.background = getDrawable(R.drawable.bg_bottom_radius)
             }
         }
+        binding.title.text = bean?.title
+        binding.version.text = bean?.versionName
+        binding.content.text = bean?.content
     }
 
     override fun initData() {
-        startService(Intent(this,UpdateService::class.java))
+        startService(Intent(this, UpdateService::class.java))
     }
 
     override fun initListener() {
@@ -62,7 +64,29 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
                 ) {
                     when {
                         it -> {
-                            DownloadUtil.download(this@UpdateDialogActivity,downUrl)
+                            val url = bean?.downloadUrl?:""
+                            DownloadUtil.download(this@UpdateDialogActivity, url) {
+                                downloadStart {
+                                    binding.llProgress.visibility = View.VISIBLE
+                                    binding.content.visibility = View.GONE
+                                    binding.confirm.text = getString(R.string.update_downloading)
+                                }
+                                downloading {progress->
+                                    binding.progress.setProgress(progress)
+                                    binding.confirm.text = getString(R.string.update_downloading)
+                                }
+                                downloadComplete {
+                                    binding.llProgress.visibility = View.GONE
+                                    binding.content.visibility = View.VISIBLE
+                                    binding.confirm.text = getString(R.string.update_confirm)
+                                }
+                                downloadFail {
+                                    binding.llProgress.visibility = View.GONE
+                                    binding.content.visibility = View.VISIBLE
+                                    binding.confirm.text = getString(R.string.update_downloading)
+                                    ToastUtil.toastCustomer("下载失败")
+                                }
+                            }
                         }
                     }
                 }
@@ -71,7 +95,7 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
     }
 
     override fun onBackPressed() {
-        if (isForce) {
+        if (bean?.forceUpdate == true) {
             val current = System.currentTimeMillis()
             if (current - exitTime > 2000) {
                 exitTime = current
