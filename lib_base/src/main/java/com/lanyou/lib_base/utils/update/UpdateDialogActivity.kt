@@ -1,11 +1,12 @@
 package com.lanyou.lib_base.utils.update
 
 import android.Manifest
-import android.app.DownloadManager
 import android.content.Intent
-import android.content.IntentFilter
+import android.net.Uri
 import android.os.Process
+import android.provider.Settings
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -16,16 +17,18 @@ import com.lanyou.lib_base.base.BaseViewModel
 import com.lanyou.lib_base.databinding.ActivityUpdateDialogBinding
 import com.lanyou.lib_base.net.beans.common.UpdateInfoBean
 import com.lanyou.lib_base.utils.ActivityController
+import com.lanyou.lib_base.utils.AppUtil
 import com.lanyou.lib_base.utils.ToastUtil
+import java.io.File
 
 @Route(path = ARouterConstant.UPDATE)
 class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewModel>() {
 
     private var exitTime: Long = 0
-
+    private var srcPath = ""
     @JvmField
     @Autowired(name = "DOWN_BEAN")
-    var bean: UpdateInfoBean ?= null
+    var bean: UpdateInfoBean? = null
 
 
     override fun getViewBinding(): ActivityUpdateDialogBinding =
@@ -33,7 +36,7 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
 
     override fun initView() {
         ARouter.getInstance().inject(this)
-        if (bean == null){
+        if (bean == null) {
             finish()
         }
         if (bean?.forceUpdate == true) {
@@ -55,6 +58,7 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
     override fun initListener() {
         binding.apply {
             cancel.setOnClickListener {
+                DownloadUtil.cancelDown(this@UpdateDialogActivity)
                 onBackPressed()
             }
             confirm.setOnClickListener {
@@ -64,26 +68,35 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
                 ) {
                     when {
                         it -> {
-                            val url = bean?.downloadUrl?:""
+                            val url = bean?.downloadUrl ?: ""
                             DownloadUtil.download(this@UpdateDialogActivity, url) {
                                 downloadStart {
                                     binding.llProgress.visibility = View.VISIBLE
                                     binding.content.visibility = View.GONE
                                     binding.confirm.text = getString(R.string.update_downloading)
+                                    binding.confirm.isEnabled = false
                                 }
-                                downloading {progress->
+                                downloading { progress ->
                                     binding.progress.setProgress(progress)
                                     binding.confirm.text = getString(R.string.update_downloading)
                                 }
-                                downloadComplete {
+                                downloadComplete { path ->
                                     binding.llProgress.visibility = View.GONE
                                     binding.content.visibility = View.VISIBLE
                                     binding.confirm.text = getString(R.string.update_confirm)
+                                    path?.let {
+                                        srcPath = path
+                                        if (hasInstallPermission()){
+                                            startInstall(path)
+                                        }
+                                    }
+                                    binding.confirm.isEnabled = true
                                 }
                                 downloadFail {
                                     binding.llProgress.visibility = View.GONE
                                     binding.content.visibility = View.VISIBLE
-                                    binding.confirm.text = getString(R.string.update_downloading)
+                                    binding.confirm.text = getString(R.string.update_confirm)
+                                    binding.confirm.isEnabled = true
                                     ToastUtil.toastCustomer("下载失败")
                                 }
                             }
@@ -112,5 +125,42 @@ class UpdateDialogActivity : BaseActivity<ActivityUpdateDialogBinding, BaseViewM
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    private fun startInstall(path:String){
+        val file = File(path)
+        if (file.isFile and  file.exists()) {
+            AppUtil.installApk(this@UpdateDialogActivity, file)
+        } else {
+            ToastUtil.toastCustomer("下载失败")
+        }
+    }
+
+    private fun hasInstallPermission(): Boolean {
+        val haveInstallPermission =
+            this@UpdateDialogActivity.packageManager.canRequestPackageInstalls()
+        return if (!haveInstallPermission) {
+            //TODO 待后续完善，这种方式可能存在其他意外情况
+            val parse = Uri.parse("package:" + this@UpdateDialogActivity.packageName)
+            val intent = Intent(
+                Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                parse
+            )
+            ActivityCompat.startActivityForResult(
+                this@UpdateDialogActivity, intent,
+                AppUtil.REQUEST_CODE_INSTALL_APK_PERMISSION, null
+            )
+            false
+        } else {
+            true
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppUtil.REQUEST_CODE_INSTALL_APK_PERMISSION && resultCode == RESULT_OK) {
+            //获取APK安装权限成功后返回，点击安装apk
+            startInstall(srcPath)
+        }
     }
 }

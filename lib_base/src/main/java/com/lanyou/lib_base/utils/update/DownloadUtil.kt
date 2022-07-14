@@ -11,7 +11,7 @@ import java.io.File
 
 object DownloadUtil {
     private var downloadUpdateApkFilePath = ""
-
+    private var downTask: BaseDownloadTask? = null
     fun download(context: Context, url: String, callBack: DownloadCallBack.() -> Unit) {
         val downloadCallBack = registerDownLoadCallBack(callBack)
         downloadUpdateApkFilePath = getApkPath()
@@ -23,16 +23,14 @@ object DownloadUtil {
             AppUtil.deleteFile(downloadUpdateApkFilePath)
             AppUtil.deleteFile(FileDownloadUtils.getTempPath(downloadUpdateApkFilePath))
         }
+        downTask = FileDownloader.getImpl().create(url).setPath(downloadUpdateApkFilePath)
 
-        val downTask = FileDownloader.getImpl()
-            .create(url)
-            .setPath(downloadUpdateApkFilePath)
-        downTask.setListener(object : FileDownloadListener() {
+        downTask?.setListener(object : FileDownloadListener() {
             override fun pending(task: BaseDownloadTask?, soFarBytes: Int, totalBytes: Int) {
                 UpdateReceiver.send(context, 0)
                 downloadCallBack.downloadStart()
                 if (totalBytes < 0) {
-                    downTask.pause()
+                    downTask?.pause()
                 }
             }
 
@@ -44,7 +42,7 @@ object DownloadUtil {
                 downloadCallBack.downloading(progress)
 
                 if (totalBytes < 0) {
-                    downTask.pause()
+                    downTask?.pause()
                 }
             }
 
@@ -70,12 +68,21 @@ object DownloadUtil {
             override fun warn(task: BaseDownloadTask?) {
             }
 
-        })
-            .start()
+        })?.start()
     }
+
+    fun cancelDown(context: Context) {
+        if (downTask != null) {
+            downTask?.pause()
+        }
+        UpdateReceiver.cancelDown(context)
+        AppUtil.deleteFile(downloadUpdateApkFilePath)
+        AppUtil.deleteFile(FileDownloadUtils.getTempPath(downloadUpdateApkFilePath))
+    }
+
     private fun getApkPath(): String {
-        return APP.getInstance().applicationContext.externalCacheDir.toString() +
-                "/" + APP.getInstance().applicationContext.packageName + "/apks/" +
+        return APP.getInstance().applicationContext.filesDir.toString() +
+                "/apks/" +
                 "VehicleManager_" + AppUtil.getVersionName(APP.getInstance().applicationContext) + ".apk"
     }
 }
