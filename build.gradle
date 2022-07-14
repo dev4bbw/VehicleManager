@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    apply from:"config.gradle"
+
     dependencies {
         classpath('com.dixon.plugin:component_light:1.0.0')
         classpath "com.alibaba:arouter-register:1.0.2"
