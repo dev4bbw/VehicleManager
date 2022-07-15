@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lanyou.lib_base.base.BaseViewModel
 import com.lanyou.lib_base.base.request
 import com.lanyou.lib_base.net.ExceptionHandle
+import com.lanyou.lib_base.net.beans.zxc.ZXCMainBubbleBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
 import com.lanyou.lib_base.utils.ToastUtil
 
@@ -15,12 +16,12 @@ class ZCListViewModel : BaseViewModel() {
     var isMainRefreshing = MutableLiveData<Boolean>(false)
     var isChildFinishRefresh = MutableLiveData<Boolean>(false)
     var listData  = MutableLiveData<ZXCOrderBean>()
-
+    var bubbleBean = MutableLiveData<ZXCMainBubbleBean>()
     fun loadBubble() {
         request({ repository.getMainBubble() }) {
             onRequestSuccess {
                 if (it != null) {
-
+                    bubbleBean.value = it
                 } else {
                     ToastUtil.toastCustomer(ExceptionHandle.handleException(Throwable("无数据")).err)
                 }

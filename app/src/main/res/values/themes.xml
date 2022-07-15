@@ -1,17 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.VehicleManager" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.VehicleManager" parent="Theme.MaterialComponents.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/text_color_red</item>
         <item name="android:windowBackground">@color/white</item>
         <!-- Customize your theme here. -->
-    </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="android:windowBackground">@color/white</item>
     </style>
 </resources>

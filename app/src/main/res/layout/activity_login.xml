@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/basic"
-
+        android:fontFamily="sans-serif-black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -78,6 +78,7 @@
                 app:layout_constraintTop_toTopOf="@+id/login_account" />
 
             <com.lanyou.lib_base.widgets.ClearableEditText
+                android:fontFamily="sans-serif"
                 android:id="@+id/login_account"
                 android:layout_width="0dp"
                 android:textSize="14sp"
@@ -88,6 +89,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/input_hint"
                 android:maxLines="1"
+                android:textColor="@color/app_text_color"
                 android:textColorHint="@color/text_hint_color"
                 android:textCursorDrawable="@null"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,6 +108,7 @@
                 app:layout_constraintTop_toTopOf="@+id/login_pwd" />
 
             <com.lanyou.lib_base.widgets.PwdVisibleLayout
+                android:fontFamily="sans-serif"
                 android:id="@+id/login_pwd"
                 android:textSize="14sp"
                 android:layout_width="0dp"
@@ -226,6 +229,8 @@
         android:textColor="@drawable/selector_color_common_btn_text"
         app:layout_constraintTop_toBottomOf="@+id/cl_input" />
     <CheckBox
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/app_text_color"
         android:layout_marginTop="10dp"
         android:drawablePadding="8dp"
         android:padding="5dp"
@@ -283,6 +288,7 @@
             android:src="@drawable/icon_verify_code" />
 
         <TextView
+            android:textColor="@color/text_color_grey"
             android:layout_marginTop="10dp"
             android:text="验证码注册登录"
             android:layout_width="wrap_content"

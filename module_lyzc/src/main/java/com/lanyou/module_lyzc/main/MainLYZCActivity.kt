@@ -1,6 +1,8 @@
 package com.lanyou.module_lyzc.main
 
 import android.os.Process
+import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -13,7 +15,9 @@ import com.lanyou.lib_base.utils.ActivityController
 import com.lanyou.lib_base.utils.ToastUtil
 import com.lanyou.lib_base.utils.mmkvUtil
 import com.lanyou.lib_base.utils.routerNavigate
+import com.lanyou.lib_base.databinding.CustomtabNewTackItemBinding
 import com.lanyou.module_lyzc.databinding.ActivityLyzcMainBinding
+import java.lang.Exception
 
 @Route(path = ARouterConstant.LYZC_MAIN)
 class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>() {
@@ -35,12 +39,16 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
         }
         TabLayoutMediator(
             binding.bottom.tab,
-            binding.bottom.vpContent
+            binding.bottom.vpContent,
+            false,
+            false
         ) { tab, position ->
+            val tabBinding = CustomtabNewTackItemBinding.inflate(layoutInflater)
+            tab.customView = tabBinding.root
             when (position) {
-                0 -> tab.text = "近2日待取车"
-                1 -> tab.text = "近2日待还车"
-                else -> tab.text = "认证处理"
+                0 -> tabBinding.tabItemText.text = "近2日待取车"
+                1 -> tabBinding.tabItemText.text = "近2日待还车"
+                else -> tabBinding.tabItemText.text = "认证处理"
             }
         }.attach()
 
@@ -62,6 +70,17 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
     }
 
     override fun initListener() {
+        viewModel.bubbleBean.observe(this) { bean ->
+            val takeCar = bean.waitToGetNum
+            val returnCar = bean.waitToReturnNum
+            val auth = bean.authenticationNum
+//            binding.bottom.tab.getTabAt(0)?.orCreateBadge?.number = 199
+            setBadge(switchBadge(takeCar), switchBadge(returnCar), switchBadge(auth))
+        }
+        viewModel.listData.observe(this) {
+
+        }
+
         viewModel.isChildFinishRefresh.observe(this) {
             if (it) {
                 binding.bottom.refresh.finishRefresh()
@@ -69,6 +88,41 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
             }
         }
         initClick()
+    }
+
+    private fun switchBadge(src: String): Int {
+        return try {
+            val result = src.toInt()
+            if (result > 99) {
+                99
+            } else {
+                result
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            0
+        }
+    }
+
+    private fun setBadge(takeNum: Int = 0, returnNum: Int = 0, authNum: Int = 0) {
+        val badgeTake =
+            binding.bottom.tab.getTabAt(0)?.customView?.findViewById<TextView>(com.lanyou.lib_base.R.id.rv_num)
+        badgeTake?.apply {
+            visibility = if (takeNum <= 0) View.GONE else View.VISIBLE
+            text = takeNum.toString()
+        }
+        val badgeReturn =
+            binding.bottom.tab.getTabAt(1)?.customView?.findViewById<TextView>(com.lanyou.lib_base.R.id.rv_num)
+        badgeReturn?.apply {
+            visibility = if (returnNum <= 0) View.GONE else View.VISIBLE
+            text = returnNum.toString()
+        }
+        val badgeAuth =
+            binding.bottom.tab.getTabAt(2)?.customView?.findViewById<TextView>(com.lanyou.lib_base.R.id.rv_num)
+        badgeAuth?.apply {
+            visibility = if (authNum <= 0) View.GONE else View.VISIBLE
+            text = authNum.toString()
+        }
     }
 
     private fun initClick() {
@@ -81,7 +135,7 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
             rlCarManage.setOnClickListener {}
             rlViolation.setOnClickListener {}
             rlRepair.setOnClickListener {}
-            rlReimburse.setOnClickListener {  }
+            rlReimburse.setOnClickListener { }
             rlAuth.setOnClickListener {}
         }
 
@@ -98,10 +152,10 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
 
     override fun onBackPressed() {
         val current = System.currentTimeMillis()
-        if ( current - exitTime > 2000){
+        if (current - exitTime > 2000) {
             exitTime = current
             ToastUtil.toastCustomer("再按一次退出")
-        }else{
+        } else {
             ActivityController.finishAll()
             Process.killProcess(Process.myPid())
         }

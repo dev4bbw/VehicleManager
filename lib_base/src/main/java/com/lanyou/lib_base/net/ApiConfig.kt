@@ -5,7 +5,7 @@ import com.lanyou.lib_base.utils.mmkvUtil
 
 object ApiConfig {
     //base app============================================================
-    private const val BASE_TYPE = 1 // 1-dev 2-uat 3-生产A 4-生产B
+    private const val BASE_TYPE = 3 // 1-dev 2-uat 3-生产A 4-生产B
 
     private val _baseUrl = when (BASE_TYPE) {
         1 -> "https://bms-kf.lanyou-mobility.com/lycx/gateway/"
