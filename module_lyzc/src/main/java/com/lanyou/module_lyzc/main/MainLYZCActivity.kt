@@ -33,7 +33,7 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
                 return when (position) {
                     0 -> ZCListFragment("1")
                     1 -> ZCListFragment("2")
-                    else -> ZCListFragment("3")
+                    else -> ZCListFragment("102")
                 }
             }
         }
@@ -55,6 +55,7 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
         binding.bottom.refresh.apply {
             setEnableLoadMore(false)
             setOnRefreshListener {
+                viewModel.loadBubble()
                 viewModel.isMainRefreshing.value = true
                 viewModel.isChildFinishRefresh.value = false
             }

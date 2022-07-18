@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.lanyou.lib_base.dialog.ProgressDialog
 import com.lanyou.lib_base.utils.ToastUtil
 import java.lang.reflect.ParameterizedType
+import kotlin.math.ceil
 
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> : Fragment() {
     protected lateinit var binding: V
@@ -78,5 +79,14 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     fun dismissProgress() {
         progressDialog?.dismiss()
+    }
+
+    fun getMaxPage(total: Int, pageSize: Long): Int {
+        return try {
+            val num = total.toDouble() / pageSize
+            ceil(num).toInt()
+        } catch (e: Exception) {
+            0
+        }
     }
 }

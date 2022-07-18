@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lanyou.lib_base.base.BaseViewModel
 import com.lanyou.lib_base.base.request
 import com.lanyou.lib_base.net.ExceptionHandle
+import com.lanyou.lib_base.net.beans.lyzc.ZCAuthBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCMainBubbleBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
 import com.lanyou.lib_base.utils.ToastUtil
@@ -15,8 +16,12 @@ class ZCListViewModel : BaseViewModel() {
 
     var isMainRefreshing = MutableLiveData<Boolean>(false)
     var isChildFinishRefresh = MutableLiveData<Boolean>(false)
+
     var listData  = MutableLiveData<ZXCOrderBean>()
+    var authListData  = MutableLiveData<ZCAuthBean>()
+
     var bubbleBean = MutableLiveData<ZXCMainBubbleBean>()
+
     fun loadBubble() {
         request({ repository.getMainBubble() }) {
             onRequestSuccess {
@@ -56,4 +61,29 @@ class ZCListViewModel : BaseViewModel() {
 
         }
     }
+
+    fun getAuthListData(current: String, driverStatus: String) {
+        request({
+            repository.getAuthList(
+                current = current, driverStatus = driverStatus
+            )
+        }) {
+            onRequestSuccess {
+                isMainRefreshing.value = false
+                isChildFinishRefresh.value = true
+                if (it != null) {
+                    authListData.value = it
+                } else {
+                    ToastUtil.toastCustomer(ExceptionHandle.handleException(Throwable("无数据")).err)
+                }
+            }
+            onRequestFail {
+                isMainRefreshing.value = false
+                isChildFinishRefresh.value = true
+                ToastUtil.toastCustomer(it.message)
+            }
+
+        }
+    }
+
 }

@@ -3,6 +3,8 @@ package com.lanyou.lib_base.base
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
 import com.lanyou.lib_base.net.*
+import com.lanyou.lib_base.utils.ToastUtil
+import com.lanyou.lib_base.utils.logout
 import kotlinx.coroutines.*
 
 /**
@@ -60,8 +62,10 @@ suspend fun <T> executeResponse(
                     )
                 )
             }
-            "logout" -> {
-
+            "logOut" -> {
+                val msg = if (response.message.isNullOrBlank())"登录已过期，请重新登录" else response.message
+                ToastUtil.toastCustomer(msg)
+                logout()
             }
             else -> {
                 custom(response)

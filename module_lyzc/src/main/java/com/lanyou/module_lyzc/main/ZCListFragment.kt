@@ -9,12 +9,15 @@ import com.lanyou.lib_base.base.BaseFragment
 import com.lanyou.lib_base.utils.DisplayUtil
 import com.lanyou.lib_base.utils.SpaceItemDecoration
 import com.lanyou.module_lyzc.databinding.FragmentListZcBinding
+import kotlin.math.ceil
 
-class ZCListFragment(private val type: String) : BaseFragment<FragmentListZcBinding, ZCListViewModel>() {
+class ZCListFragment(private val type: String) :
+    BaseFragment<FragmentListZcBinding, ZCListViewModel>() {
     private val vm: ZCListViewModel by activityViewModels()
     private var mPage: Int = 1
-    private var currentVisible:Boolean = false
-    private lateinit var mAdapter: ZCOrderListAdapter
+    private var currentVisible: Boolean = false
+    private lateinit var mOrderAdapter: ZCOrderListAdapter
+    private lateinit var mAuthAdapter: ZCAuthListAdapter
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -28,8 +31,12 @@ class ZCListFragment(private val type: String) : BaseFragment<FragmentListZcBind
         binding.rv.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             addItemDecoration(SpaceItemDecoration(top = DisplayUtil.dp2px(requireActivity(), 10f)))
-            mAdapter = ZCOrderListAdapter()
-            adapter = mAdapter
+            mOrderAdapter = ZCOrderListAdapter()
+            mAuthAdapter = ZCAuthListAdapter()
+
+            adapter = if ("102" == type) {
+                mAuthAdapter
+            } else mOrderAdapter
         }
 
         binding.refresh.apply {
@@ -37,7 +44,8 @@ class ZCListFragment(private val type: String) : BaseFragment<FragmentListZcBind
             setOnLoadMoreListener {
                 viewModel.isChildFinishRefresh.value = false
                 mPage++
-                viewModel.getListData(mPage.toString(), type)
+                if ("102" == type) viewModel.getAuthListData(mPage.toString(), type)
+                else viewModel.getListData(mPage.toString(), type)
             }
         }
     }
@@ -48,22 +56,36 @@ class ZCListFragment(private val type: String) : BaseFragment<FragmentListZcBind
         viewModel.isMainRefreshing.observe(this) {
             if (it && currentVisible) {
                 mPage = 1
-                viewModel.getListData(mPage.toString(), type)
+                if ("102" == type) viewModel.getAuthListData(mPage.toString(), type)
+                else viewModel.getListData(mPage.toString(), type)
             }
         }
         viewModel.isChildFinishRefresh.observe(this) {
             if (it && currentVisible)
                 binding.refresh.finishLoadMore()
         }
-        viewModel.listData.observe(this) {
-            if (!currentVisible)return@observe
-
-            mAdapter.submitList(it.records)
-            if (mPage >= it.pages!!) {
-                binding.refresh.finishLoadMoreWithNoMoreData()
-                binding.refresh.setEnableLoadMore(false)
-            } else {
-                binding.refresh.setEnableLoadMore(true)
+        if ("102" == type) {
+            viewModel.authListData.observe(this) {
+                if (!currentVisible) return@observe
+                mAuthAdapter.submitList(it.records)
+                val maxPage = it.pagination?.total?.let { it1 -> getMaxPage(it1,20) }
+                if (mPage >= maxPage!!) {
+                    binding.refresh.finishLoadMoreWithNoMoreData()
+                    binding.refresh.setEnableLoadMore(false)
+                } else {
+                    binding.refresh.setEnableLoadMore(true)
+                }
+            }
+        } else {
+            viewModel.listData.observe(this) {
+                if (!currentVisible) return@observe
+                mOrderAdapter.submitList(it.records)
+                if (mPage >= it.pages!!) {
+                    binding.refresh.finishLoadMoreWithNoMoreData()
+                    binding.refresh.setEnableLoadMore(false)
+                } else {
+                    binding.refresh.setEnableLoadMore(true)
+                }
             }
         }
     }
@@ -74,14 +96,15 @@ class ZCListFragment(private val type: String) : BaseFragment<FragmentListZcBind
         currentVisible = true
 
         mPage = 1
-        viewModel.getListData(mPage.toString(), type)
+        if ("102" == type) viewModel.getAuthListData(mPage.toString(), type)
+        else viewModel.getListData(mPage.toString(), type)
     }
 
     override fun onPause() {
         super.onPause()
         currentVisible = false
-
         XLog.tag("FragmentState").i("Fragment" + type + "不可见")
     }
+
 
 }
