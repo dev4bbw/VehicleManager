@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:textColor="@color/app_text_color"
         android:id="@+id/tv_order_no"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -142,4 +143,91 @@
         android:layout_marginTop="15dp"
         android:background="#E8E8E8"
         app:layout_constraintTop_toBottomOf="@+id/tag_plate" />
+    <LinearLayout
+        android:layout_marginVertical="10dp"
+        android:id="@+id/ll_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/hLine_sec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="end|center_vertical">
+
+        <TextView
+            android:id="@+id/tv_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_fill_8"
+            android:gravity="center"
+            android:minWidth="67dp"
+            android:minHeight="27dp"
+            android:text="@string/order_return_car"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_exchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_fill_8"
+            android:gravity="center"
+            android:minWidth="67dp"
+            android:minHeight="27dp"
+            android:text="@string/order_change_car"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_prepare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_fill_8"
+            android:gravity="center"
+            android:minWidth="67dp"
+            android:minHeight="27dp"
+            android:text="@string/order_prepare"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_allocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_fill_8"
+            android:gravity="center"
+            android:minWidth="67dp"
+            android:minHeight="27dp"
+            android:text="@string/order_allocate"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_pickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_fill_8"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minWidth="67dp"
+            android:minHeight="27dp"
+            android:paddingHorizontal="10dp"
+            android:text="@string/order_get_car"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

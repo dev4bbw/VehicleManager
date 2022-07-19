@@ -12,6 +12,12 @@ import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
 import com.lanyou.lib_base.utils.DisplayUtil
 import com.lanyou.lib_base.utils.SpaceItemDecoration
 import com.lanyou.module_lyzc.databinding.FragmentListZcBinding
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_ALLOCATION
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_DETAIL
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_EXCHANGE
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_PICKUP
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_PREPARE
+import com.lanyou.module_lyzc.main.ZCOrderListAdapter.DiffCallback.ACTION_RETURN
 import kotlin.math.ceil
 
 class ZCListFragment(private val type: String) :
@@ -36,12 +42,24 @@ class ZCListFragment(private val type: String) :
         binding.rv.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             addItemDecoration(SpaceItemDecoration(top = DisplayUtil.dp2px(requireActivity(), 10f)))
-            mOrderAdapter = ZCOrderListAdapter()
-            mAuthAdapter = ZCAuthListAdapter()
 
             adapter = if ("102" == type) {
+                mAuthAdapter = ZCAuthListAdapter()
                 mAuthAdapter
-            } else mOrderAdapter
+            } else {
+                mOrderAdapter = ZCOrderListAdapter()
+                mOrderAdapter.buttonClick={bean,action,position->
+                    when(action){
+                        ACTION_DETAIL->{}
+                        ACTION_ALLOCATION->{}
+                        ACTION_PREPARE->{}
+                        ACTION_EXCHANGE->{}
+                        ACTION_PICKUP->{}
+                        ACTION_RETURN->{}
+                    }
+                }
+                mOrderAdapter
+            }
         }
 
         binding.refresh.apply {

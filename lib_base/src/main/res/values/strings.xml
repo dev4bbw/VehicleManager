@@ -44,6 +44,11 @@
     <string name="order_over_pick">超时未取车</string>
     <string name="order_tag_user">用户：</string>
     <string name="order_tag_plate">车牌号：</string>
+    <string name="order_return_car">还车</string>
+    <string name="order_change_car">更换车辆</string>
+    <string name="order_prepare">整备</string>
+    <string name="order_allocate">配车</string>
+    <string name="order_get_car">取车</string>
 
     <!--setting-->
     <string name="setting_update">应用更新</string>
