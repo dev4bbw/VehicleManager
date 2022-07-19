@@ -51,5 +51,11 @@
     <string name="setting_cancellation">注销账户</string>
     <string name="setting_exit">退出登录</string>
 
+    <!--list-->
+    <string name="list_license_auth">驾照认证</string>
+    <string name="list_username">用户姓名</string>
+    <string name="list_license_number">驾驶证号码</string>
+    <string name="list_license_go">前往认证</string>
+
 
 </resources>

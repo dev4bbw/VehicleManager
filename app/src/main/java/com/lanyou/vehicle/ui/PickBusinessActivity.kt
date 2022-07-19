@@ -25,13 +25,20 @@ class PickBusinessActivity : BaseActivity<ActivityPickBusinessBinding, BaseViewM
             binding.clBusiness.visibility = View.GONE
             binding.tvSet.text = "暂无业务权限"
         } else if (roleList.size > 1) {
-            binding.llZxc.visibility = View.VISIBLE
-            binding.llLyzc.visibility = View.VISIBLE
+            for (role in roleList) {
+                if ("CDZ" == role) {
+                    binding.llZxc.visibility = View.VISIBLE
+                }
+                if ("ZYD" == role || "JMS" == role) {
+                    binding.llLyzc.visibility = View.VISIBLE
+                }
+            }
+
         } else {
-            if ("CDZ" == roleList[0]){
-                   //尊享车
+            if ("CDZ" == roleList[0]) {
+                //尊享车
                 routerNavigate(ARouterConstant.ZXC_MAIN)
-            }else if ("ZYD" == roleList[0]){
+            } else if ("ZYD" == roleList[0]) {
                 routerNavigate(ARouterConstant.LYZC_MAIN)
             }
         }
@@ -39,11 +46,11 @@ class PickBusinessActivity : BaseActivity<ActivityPickBusinessBinding, BaseViewM
 
     override fun initListener() {
         binding.llZxc.setOnClickListener {
-            mmkvUtil.put(KeyConstant.BUSINESS_TYPE,1)
+            mmkvUtil.put(KeyConstant.BUSINESS_TYPE, 1)
             routerNavigate(ARouterConstant.ZXC_MAIN)
         }
         binding.llLyzc.setOnClickListener {
-            mmkvUtil.put(KeyConstant.BUSINESS_TYPE,2)
+            mmkvUtil.put(KeyConstant.BUSINESS_TYPE, 2)
             routerNavigate(ARouterConstant.LYZC_MAIN)
         }
     }

@@ -1,11 +1,14 @@
 package com.lanyou.module_lyzc.main
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elvishew.xlog.XLog
 import com.lanyou.lib_base.base.BaseFragment
+import com.lanyou.lib_base.net.beans.lyzc.ZCAuthBean
+import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
 import com.lanyou.lib_base.utils.DisplayUtil
 import com.lanyou.lib_base.utils.SpaceItemDecoration
 import com.lanyou.module_lyzc.databinding.FragmentListZcBinding
@@ -18,6 +21,8 @@ class ZCListFragment(private val type: String) :
     private var currentVisible: Boolean = false
     private lateinit var mOrderAdapter: ZCOrderListAdapter
     private lateinit var mAuthAdapter: ZCAuthListAdapter
+    private var orderList = mutableListOf<ZXCOrderBean.RecordsBean>()
+    private var authList = mutableListOf<ZCAuthBean.AuthRecordsBean>()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -52,7 +57,7 @@ class ZCListFragment(private val type: String) :
 
 
     override fun initData() {
-        binding.tvNoData.text = type
+//        binding.tvNoData.text = type
         viewModel.isMainRefreshing.observe(this) {
             if (it && currentVisible) {
                 mPage = 1
@@ -67,8 +72,19 @@ class ZCListFragment(private val type: String) :
         if ("102" == type) {
             viewModel.authListData.observe(this) {
                 if (!currentVisible) return@observe
-                mAuthAdapter.submitList(it.records)
-                val maxPage = it.pagination?.total?.let { it1 -> getMaxPage(it1,20) }
+                if (mPage == 1) {
+                    authList.clear()
+                }
+                it.records?.let { list -> authList.addAll(list) }
+
+                binding.llNoData.visibility = if (authList.size == 0) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+
+                mAuthAdapter.submitList(authList)
+                val maxPage = it.pagination?.total?.let { total -> getMaxPage(total, 20) }
                 if (mPage >= maxPage!!) {
                     binding.refresh.finishLoadMoreWithNoMoreData()
                     binding.refresh.setEnableLoadMore(false)
@@ -79,7 +95,18 @@ class ZCListFragment(private val type: String) :
         } else {
             viewModel.listData.observe(this) {
                 if (!currentVisible) return@observe
-                mOrderAdapter.submitList(it.records)
+
+                if (mPage == 1) {
+                    orderList.clear()
+                }
+                it.records?.let { list -> orderList.addAll(list) }
+
+                binding.llNoData.visibility = if (orderList.size == 0) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+                mOrderAdapter.submitList(orderList)
                 if (mPage >= it.pages!!) {
                     binding.refresh.finishLoadMoreWithNoMoreData()
                     binding.refresh.setEnableLoadMore(false)

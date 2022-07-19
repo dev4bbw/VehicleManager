@@ -32,6 +32,7 @@ interface LYZCApiServices {
      */
     @Headers("urlname:appinforent")
     @POST("lycxcrm/customer/getZcDriverAuditList")
+//    @POST("lycxcrm/customer/getDriverAuditList") //尊享车接口，调试用
     suspend fun getZCAuthList(@Body map:HashMap<String,String>): BaseResponse<ZCAuthBean>
 
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lanyou.lib_base.net.beans.lyzc.ZCAuthBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
+import com.lanyou.module_lyzc.databinding.LayoutAuthListItemZcBinding
 import com.lanyou.module_lyzc.databinding.LayoutListItemZcBinding
 
 class ZCAuthListAdapter :
@@ -14,18 +15,21 @@ class ZCAuthListAdapter :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListHolder =
-        ListHolder(LayoutListItemZcBinding.inflate(LayoutInflater.from(parent.context)))
+        ListHolder(LayoutAuthListItemZcBinding.inflate(LayoutInflater.from(parent.context)))
 
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ListHolder(private var binding: LayoutListItemZcBinding) :
+    class ListHolder(private var binding: LayoutAuthListItemZcBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(bean: ZCAuthBean.AuthRecordsBean) {
 //            val orderNo = "订单号：" + (bean.orderNo?:"--")
 //            binding.tvOrderNo.text = orderNo
+            binding.tvTime.text = bean.createTime
+            binding.tvUser.text = bean.realName
+            binding.tvLicense.text = bean.driverNo
         }
     }
 
