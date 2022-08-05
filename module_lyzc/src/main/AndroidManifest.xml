@@ -12,6 +12,9 @@
         <activity
             android:name=".main.MainLYZCActivity"
             android:exported="true"/>
+        <activity android:name=".ordermanage.ZCOrderManageActivity"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

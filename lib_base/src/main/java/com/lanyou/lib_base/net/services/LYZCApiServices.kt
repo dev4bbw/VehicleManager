@@ -4,6 +4,7 @@ import com.lanyou.lib_base.net.BaseResponse
 import com.lanyou.lib_base.net.beans.lyzc.ZCAuthBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCMainBubbleBean
 import com.lanyou.lib_base.net.beans.zxc.ZXCOrderBean
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -34,5 +35,19 @@ interface LYZCApiServices {
     @POST("lycxcrm/customer/getZcDriverAuditList")
 //    @POST("lycxcrm/customer/getDriverAuditList") //尊享车接口，调试用
     suspend fun getZCAuthList(@Body map:HashMap<String,String>): BaseResponse<ZCAuthBean>
+
+    /**
+     * 手动配车
+     */
+    @Headers("urlname:appinforent")
+    @POST("lycxzcs/web/zcOrderVehicle/changeOrderVehicle")
+    suspend fun allocateZC(@Body  map:HashMap<String,String>): BaseResponse<String>
+
+    /**
+     * 订单整备车辆
+     */
+    @Headers("urlname:appinforent")
+    @POST("lycxzcs/web/zcOrderVehicle/arrangeZcOrderVehicle")
+    suspend fun arrangeZC(@Body  map:HashMap<String,String>): BaseResponse<String>
 
 }

@@ -17,6 +17,7 @@ import com.lanyou.lib_base.utils.mmkvUtil
 import com.lanyou.lib_base.utils.routerNavigate
 import com.lanyou.lib_base.databinding.CustomtabNewTackItemBinding
 import com.lanyou.module_lyzc.databinding.ActivityLyzcMainBinding
+import com.lanyou.module_lyzc.ordermanage.ZCOrderManageActivity
 import java.lang.Exception
 
 @Route(path = ARouterConstant.LYZC_MAIN)
@@ -132,7 +133,9 @@ class MainLYZCActivity : BaseActivity<ActivityLyzcMainBinding, ZCListViewModel>(
         }
 
         binding.bottom.apply {
-            rlOrder.setOnClickListener {}
+            rlOrder.setOnClickListener {
+                toActivity(ZCOrderManageActivity::class.java)
+            }
             rlCarManage.setOnClickListener {}
             rlViolation.setOnClickListener {}
             rlRepair.setOnClickListener {}

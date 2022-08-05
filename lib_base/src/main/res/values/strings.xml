@@ -49,6 +49,9 @@
     <string name="order_prepare">整备</string>
     <string name="order_allocate">配车</string>
     <string name="order_get_car">取车</string>
+    <string name="order_build_new">新建\n订单</string>
+    <string name="order_search_hint">订单号/手机号/客户姓名/车牌号</string>
+
 
     <!--setting-->
     <string name="setting_update">应用更新</string>
