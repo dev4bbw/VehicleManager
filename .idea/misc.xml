@@ -38,9 +38,12 @@
         <entry key="..\:/Android2022/LanyouVehicleKT/lib_base/src/main/res/layout/layout_pwd_visible.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_lyzc_main.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_main.xml" value="0.24114583333333334" />
+        <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_vehicle_manage.xml" value="0.24010416666666667" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_zc_order.xml" value="0.176" />
+        <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/activity_zc_vehicle_manage.xml" value="0.23743589743589744" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/fragment_list.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/fragment_list_zc.xml" value="0.24114583333333334" />
+        <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/fragment_zc_vehiclemanage.xml" value="0.23743589743589744" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/layout_auth_list_item_zc.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/layout_list_item.xml" value="0.24114583333333334" />
         <entry key="..\:/Android2022/LanyouVehicleKT/module_lyzc/src/main/res/layout/layout_list_item_zc.xml" value="0.24114583333333334" />

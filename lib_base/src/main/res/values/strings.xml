@@ -52,6 +52,9 @@
     <string name="order_build_new">新建\n订单</string>
     <string name="order_search_hint">订单号/手机号/客户姓名/车牌号</string>
 
+    <!--vehicle_manage-->
+    <string name="vehicle_manage">车辆管理</string>
+
 
     <!--setting-->
     <string name="setting_update">应用更新</string>
